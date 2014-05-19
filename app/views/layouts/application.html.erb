@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dem</title>
+    <%= javascript_include_tag '/assets/jquery-1.10.js' %>
+  <link href="/assets/css.css?body=1" media="screen" rel="stylesheet" />d
+  <%= javascript_include_tag '/assets/jquery.cycle.all.js' %>
+  <script>
+$(document).ready(function() {
+    $('#image').cycle({ 
+	fx:    'fade', // choose your transition type, ex: fade, scrollUp, shuffle, etc...
+    next:  '#right', 
+    
+	});
+});
+  </script>
+
+</head>
+<body>
+<div id="user">
+<% if user_signed_in? %>
+Signed in as <%= current_user.email %>.Not you?
+<%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+<% else %>
+<%= link_to "Sign up", new_user_registration_path %> or <%= link_to "sign in", new_user_session_path %>
+<% end %>
+	
+</div>
+<% flash.each do |name, msg| %>
+<%= content_tag :div, msg, :id => "flash_#{name}" %>
+<% end %>
+
+<div id="container">
+
+	<div id="ernst">
+		<ul id="navmenu">
+			<li><%= link_to_unless_current("HOME",root_path) %></li>
+			<li><%= link_to_unless_current("ABOUT US",about_path ) %></li>
+			<li><%= link_to_unless_current("COWS",cows_path) %></li>
+			<li><%= link_to_unless_current("CONTACTUS",contactus_path) %></li>
+			<li><%= link_to_unless_current("FAQ",faq_path) %></li>
+			
+
+		</ul>
+
+	</div>
+<div id="image">
+	<%=image_tag "img1.jpg"%>
+
+</div>
+
+
+<%= yield %>
+</div>
+<div id="footer">
+		<div class="table">
+		<ul id="horizon-list">
+			<li><a href="#">Home|</a></li>
+			<li><a href="#">Contactus|</a></li>
+			<li><a href="#">FAQ|</a></li>
+			<li><a href="#">Services|</a></li>
+			<li><a href="#">Complaints|</a></li>
+			<li><a href="#">Compliments|</a></li><br/><br/>
+
+			</ul>
+              
+			</div>
+		</div><!--end of footer-->	
+
+</body>
+</html>
